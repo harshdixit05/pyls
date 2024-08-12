@@ -18,3 +18,26 @@ def getLongFormatResults(results):
         filename = i["filename"]
         list_result.append(modtime + "\t" + filesize + "\t" + filename)
     return list_result
+def formatResultsWithFileType(results):
+    """
+    Formats the list of file descriptions to include file type indicators
+    (e.g., '/' for directories and '*' for executable files).
+
+    Inputs -
+    results = List of dictionaries, like returned by getDescriptionsOfFilesInDir()
+
+    Outputs:
+    List of strings with file type indicators.
+    """
+    assert isinstance(results, list), "results should be a list"
+
+    list_result = []
+    for i in results:
+        if i["filetype"] == 'd':
+            filename = i["filename"] + "/"
+        elif i["filetype"] == 'x':
+            filename = i["filename"] + "*"
+        else:
+            filename = i["filename"]
+        list_result.append(filename)
+    return list_result
